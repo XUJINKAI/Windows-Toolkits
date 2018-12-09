@@ -4,9 +4,62 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Windows_Toolkits"
+        xmlns:xwpf="clr-namespace:XJK.WPF;assembly=XJKdotNetLibrary.WPF"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Windows Toolkits" Height="400" Width="541.02">
     <Grid>
-        
+        <Grid.Resources>
+            <Style x:Name="Selectable" TargetType="TextBox">
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="BorderThickness" Value="0"></Setter>
+                <Setter Property="Text" Value="{Binding Text, Mode=OneWay}"></Setter>
+                <Setter Property="IsReadOnly" Value="True"></Setter>
+                <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            </Style>
+        </Grid.Resources>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+                <ListView Name="BuildinApps_ListView">
+                    <ListView.Items>
+                        <local:ToolApp AppName="InputSpy"></local:ToolApp>
+                        <local:ToolApp AppName="KeepMonitorOn"></local:ToolApp>
+                    </ListView.Items>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="150">
+                                <Button Content="{Binding Protocol}" Click="BuildinApps_ListView_Item_Run" Height="50"></Button>
+                                <StackPanel.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Description}"></TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </StackPanel.ToolTip>
+                                <StackPanel.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Run" Click="BuildinApps_ListView_Item_Run"></MenuItem>
+                                        <MenuItem Header="Copy Protocol" Click="BuildinApps_ListView_Item_CopyProtocol"></MenuItem>
+                                        <MenuItem Header="Open Location" Click="BuildinApps_ListView_Item_OpenLocation"></MenuItem>
+                                    </ContextMenu>
+                                </StackPanel.ContextMenu>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Margin="0" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+                <xwpf:AutoLinkTextBox FontSize="16" xml:space="preserve">Open source toolkits, find codes here: [https://github.com/XUJINKAI/Windows-Toolkits.git]
+Rate this app in [microsoft store](ms-windows-store://pdp/?productid=9N7L3N58WT58)
+
+Author: [XUJINKAI.net](https://xujinkai.net), Try anothor powerful hotkey tool:
+OneQuick: [Store page](ms-windows-store://pdp/?productid=9PFN5K6QXT46), [Home page](https://onequick.org)</xwpf:AutoLinkTextBox>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
