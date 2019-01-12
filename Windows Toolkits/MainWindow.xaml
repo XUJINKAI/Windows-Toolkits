@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Windows_Toolkits"
-        xmlns:xwpf="clr-namespace:XJK.WPF;assembly=XJKdotNetLibrary.WPF"
+        xmlns:wpf="clr-namespace:XJK.WPF;assembly=XJK.WPF"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
         Title="Windows Toolkits" Height="400" Width="541.02">
@@ -22,13 +22,14 @@
             <StackPanel>
                 <ListView Name="BuildinApps_ListView">
                     <ListView.Items>
-                        <local:ToolApp AppName="InputSpy"></local:ToolApp>
-                        <local:ToolApp AppName="KeepMonitorOn"></local:ToolApp>
+                        <local:ToolApp AppName="Input Spy" Protocol="inputspy:" Description="System low-level hook"></local:ToolApp>
+                        <local:ToolApp AppName="Keep Monitor On" Protocol="keepmonitoron:" Description="Avoid system sleep"></local:ToolApp>
+                        <!--<local:ToolApp AppName="Network" Description="get http header"></local:ToolApp>-->
                     </ListView.Items>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Width="150">
-                                <Button Content="{Binding Protocol}" Click="BuildinApps_ListView_Item_Run" Height="50"></Button>
+                                <Button Content="{Binding AppName}" Click="BuildinApps_ListView_Item_Run" Height="50"></Button>
                                 <StackPanel.ToolTip>
                                     <ToolTip>
                                         <StackPanel>
@@ -42,6 +43,7 @@
                                     <ContextMenu>
                                         <MenuItem Header="Run" Click="BuildinApps_ListView_Item_Run"></MenuItem>
                                         <MenuItem Header="Copy Protocol" Click="BuildinApps_ListView_Item_CopyProtocol"></MenuItem>
+                                        <Separator/>
                                         <MenuItem Header="Open Location" Click="BuildinApps_ListView_Item_OpenLocation"></MenuItem>
                                     </ContextMenu>
                                 </StackPanel.ContextMenu>
@@ -54,11 +56,11 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                 </ListView>
-                <xwpf:AutoLinkTextBox FontSize="16" xml:space="preserve">Open source toolkits, find codes here: [https://github.com/XUJINKAI/Windows-Toolkits.git]
+                <wpf:AutoLinkTextBox FontSize="16" xml:space="preserve">Open source toolkits, find codes here: [https://github.com/XUJINKAI/Windows-Toolkits.git]
 Rate this app in [microsoft store](ms-windows-store://pdp/?productid=9N7L3N58WT58)
 
 Author: [XUJINKAI.net](https://xujinkai.net), Try anothor powerful hotkey tool:
-OneQuick: [Store page](ms-windows-store://pdp/?productid=9PFN5K6QXT46), [Home page](https://onequick.org)</xwpf:AutoLinkTextBox>
+OneQuick: [Store page](ms-windows-store://pdp/?productid=9PFN5K6QXT46), [Home page](https://onequick.org)</wpf:AutoLinkTextBox>
             </StackPanel>
         </ScrollViewer>
     </Grid>

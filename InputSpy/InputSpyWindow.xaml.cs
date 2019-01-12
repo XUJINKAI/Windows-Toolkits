@@ -23,13 +23,16 @@ namespace InputSpy
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class InputSpyWindow : Window
+    public partial class InputSpyWindow
     {
         private KeyboardLLHook KeyboardLLHook;
         private MouseLLHook MouseLLHook;
         
         public bool IsSpying { get; private set; }
-        
+        public bool DisplayAll => DisplayAllRadioButton.IsChecked ?? false;
+        public bool DisplayKeyDown => DisplayKeyDownRadioButton.IsChecked ?? false;
+        public bool DisplayMouse => DisplayMouseRadioButton.IsChecked ?? false;
+
         public InputSpyWindow(KeyboardLLHook keyboardLLHook, MouseLLHook mouseLLHook)
         {
             InitializeComponent();
@@ -59,13 +62,15 @@ namespace InputSpy
             }
             if (e.PressType != PressType.None)
             {
-                LogLine(e);
+                if (DisplayAll || DisplayMouse)
+                    LogLine(e);
             }
         }
 
         private void KeyboardLLHook_KeyChange(object sender, KeyChangeEventArgs e)
         {
-            LogLine(e);
+            if (DisplayAll || DisplayKeyDown && e.PressType == PressType.KeyDown)
+                LogLine(e);
         }
 
         public void StopSpy()
@@ -85,7 +90,7 @@ namespace InputSpy
         {
             base.OnSourceInitialized(e);
             var handle = Win.Find.ByWindow(this);
-            XJK.TimerHelper.NewTickTock(1000, (s, _) =>
+            XJK.DispatcherTimerGenerator.NewTickTock(1000, (s, _) =>
             {
                 if (!Win.Topmost.Get(handle))
                 {
@@ -107,6 +112,11 @@ namespace InputSpy
             LastLogTime = DateTime.Now;
             LogBox.Text += s.ToString() + Environment.NewLine;
             Scroller.ScrollToEnd();
+        }
+
+        private void ClearText(object sender, RoutedEventArgs e)
+        {
+            LogBox.Text = "";
         }
     }
 }

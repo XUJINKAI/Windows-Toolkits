@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InputSpy"
+        DataContext="{Binding Source={RelativeSource Self}}"
         mc:Ignorable="d"
         Topmost="True"
         WindowStyle="ToolWindow"
@@ -17,12 +18,24 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="DisplayAllRadioButton" IsChecked="True" Content="All"></RadioButton>
+                <RadioButton x:Name="DisplayKeyDownRadioButton" Content="KeyDown"></RadioButton>
+                <RadioButton x:Name="DisplayMouseRadioButton" Content="Mouse"></RadioButton>
+                <RadioButton x:Name="DisplayPauseRadioButton" Content="Pause"></RadioButton>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <TextBlock>Mouse: </TextBlock>
                 <TextBlock Name="MousePosition"></TextBlock>
             </StackPanel>
         </StackPanel>
         <ScrollViewer Name="Scroller" Grid.Row="1" VerticalScrollBarVisibility="Visible">
-            <TextBlock Name="LogBox"></TextBlock>
+            <TextBlock Name="LogBox">
+                <TextBlock.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Clear" Click="ClearText"></MenuItem>
+                    </ContextMenu>
+                </TextBlock.ContextMenu>
+            </TextBlock>
         </ScrollViewer>
     </Grid>
 </Window>

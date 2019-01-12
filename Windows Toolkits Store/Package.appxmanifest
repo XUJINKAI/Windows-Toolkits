@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" IgnorableNamespaces="uap uap3 mp rescap desktop">
-  <Identity Name="55774JinkaiXu.WindowsToolkits" Publisher="CN=4E067DC8-EEF0-4BB0-9BF9-483C9CA058ED" Version="1.0.1.0" />
+  <Identity Name="55774JinkaiXu.WindowsToolkits" Publisher="CN=4E067DC8-EEF0-4BB0-9BF9-483C9CA058ED" Version="1.0.2.0" />
   <Properties>
     <DisplayName>Windows Toolkits</DisplayName>
     <PublisherDisplayName>Jinkai Xu</PublisherDisplayName>
@@ -26,6 +26,9 @@
         <uap:SplashScreen Image="Images\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
+        <uap3:Extension Category="windows.protocol" Executable="Windows Toolkits\Windows Toolkits.exe" EntryPoint="Windows.FullTrustApplication">
+          <uap3:Protocol Name="windows-toolkits" />
+        </uap3:Extension>
         <uap3:Extension Category="windows.protocol" Executable="InputSpy\InputSpy.exe" EntryPoint="Windows.FullTrustApplication">
           <uap3:Protocol Name="inputspy" />
         </uap3:Extension>

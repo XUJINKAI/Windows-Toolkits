@@ -58,6 +58,26 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -113,20 +133,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\XJKdotNetLibrary\dotNetFramework\PInvoke\PInvoke.csproj">
-      <Project>{C6F66F18-D8AE-4005-B4A2-9FA05A953417}</Project>
-      <Name>PInvoke</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\XJKdotNetLibrary\dotNetFramework\SysX\SysX.csproj">
-      <Project>{9ce7c93b-5368-416b-bf14-ed237f813f14}</Project>
-      <Name>SysX</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="IconKeep.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IconOff.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\XJKdotNetLibrary\dotNetFramework\SysX\XJK.SysX.csproj">
+      <Project>{0b364d67-f5df-499d-87e3-93eba78cfb11}</Project>
+      <Name>XJK.SysX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XJKdotNetLibrary\dotNetStandard\Common\XJK.Common.csproj">
+      <Project>{fcaecaf2-a2bb-4efb-b148-5cfcfbe21b66}</Project>
+      <Name>XJK.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

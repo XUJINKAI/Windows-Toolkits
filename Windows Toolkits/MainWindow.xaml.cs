@@ -31,14 +31,32 @@ namespace Windows_Toolkits
         {
             InitializeComponent();
             this.DataContext = this;
-#if DEBUG
-            RoutedCommand debugCmd = new RoutedCommand();
-            debugCmd.InputGestures.Add(new KeyGesture(Key.D, ModifierKeys.Control));
-            CommandBindings.Add(new CommandBinding(debugCmd, (sender, e) =>
+            try
             {
+                var v = Package.Current.Id.Version;
+                Title += $" v{v.Major}.{v.Minor}.{v.Build}.{v.Revision}";
+            }
+            catch { }
+#if DEBUG
+            AddCommand(ModifierKeys.Control, Key.B, (sender, e) =>
+            {
+                this.Title.Count(); //Capture this to lambda
                 Debugger.Break();
-            }));
+            });
+            AddCommand(ModifierKeys.Control, Key.T, (sender, e) =>
+            {
+                this.Title.Count(); //Capture this to lambda
+                // Test code...
+
+            });
 #endif
+        }
+
+        private void AddCommand(ModifierKeys modifierKeys, Key key, ExecutedRoutedEventHandler handler)
+        {
+            RoutedCommand Cmd = new RoutedCommand();
+            Cmd.InputGestures.Add(new KeyGesture(key, modifierKeys));
+            CommandBindings.Add(new CommandBinding(Cmd, handler));
         }
         
         private static ToolApp GetDataContextAsToolApp(object sender)

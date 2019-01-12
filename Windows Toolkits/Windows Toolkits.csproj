@@ -73,6 +73,26 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -139,19 +159,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\XJKdotNetLibrary\dotNetFramework\SysX\SysX.csproj">
-      <Project>{9ce7c93b-5368-416b-bf14-ed237f813f14}</Project>
-      <Name>SysX</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\XJKdotNetLibrary\dotNetFramework\WPF\WPF.csproj">
-      <Project>{e91d5857-d99b-4825-bae8-5cf06c706a3d}</Project>
-      <Name>WPF</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +175,20 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\XJKdotNetLibrary\dotNetFramework\SysX\XJK.SysX.csproj">
+      <Project>{0b364d67-f5df-499d-87e3-93eba78cfb11}</Project>
+      <Name>XJK.SysX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XJKdotNetLibrary\dotNetFramework\WPF\XJK.WPF.csproj">
+      <Project>{e91d5857-d99b-4825-bae8-5cf06c706a3d}</Project>
+      <Name>XJK.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XJKdotNetLibrary\dotNetStandard\Common\XJK.Common.csproj">
+      <Project>{fcaecaf2-a2bb-4efb-b148-5cfcfbe21b66}</Project>
+      <Name>XJK.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

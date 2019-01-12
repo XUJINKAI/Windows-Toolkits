@@ -13,8 +13,11 @@ namespace Windows_Toolkits
     [Serializable]
     public class ToolApp
     {
-        private static readonly string AppPackageFolder = Path.GetDirectoryName(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
-        public static string GetAppPath(string AppName) => Path.Combine(AppPackageFolder, $@"{AppName}\{AppName}.exe");
+        public string AppName { get; set; }
+        public string Description { get; set; }
+        public string Protocol { get; set; }
+
+        public string FilePath => GetAppPath(AppName);
 
         public ToolApp() { }
 
@@ -23,10 +26,8 @@ namespace Windows_Toolkits
             AppName = name;
         }
 
-        public string AppName { get; set; }
-        public string Description { get; set; }
-        public string Protocol => AppName + ":";
-        public string FilePath => GetAppPath(AppName);
+        private static readonly string AppPackageFolder = Path.GetDirectoryName(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
+        public static string GetAppPath(string AppName) => Path.Combine(AppPackageFolder, $@"{AppName}\{AppName}.exe");
 
         public void Run()
         {

@@ -1,0 +1,35 @@
+﻿<Window x:Class="Network.DebugWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Network"
+        d:DataContext="{d:DesignInstance Type=local:DebugWindow, IsDesignTimeCreatable=True}"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        mc:Ignorable="d"
+        Title="Debug Network" Height="800" Width="1100">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="_Test" Click="TestFunction"></MenuItem>
+            <Separator></Separator>
+            <MenuItem Header="_Quit" Click="AppShutDown"></MenuItem>
+            <MenuItem Header="_Break" Click="DebuggerBreak"></MenuItem>
+            <MenuItem Header="Throw" Click="ThrowException"></MenuItem>
+        </Menu>
+        <ScrollViewer Name="LogBox_Scroller" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+            <TextBox Name="LogBox" FontFamily="Consolas" IsReadOnly="True" Background="{x:Null}">
+                <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="ApplicationCommands.Copy" />
+                        <Separator/>
+                        <MenuItem Header="Clear" Click="LogBox_Clear" />
+                    </ContextMenu>
+                </TextBox.ContextMenu>
+            </TextBox>
+        </ScrollViewer>
+    </Grid>
+</Window>

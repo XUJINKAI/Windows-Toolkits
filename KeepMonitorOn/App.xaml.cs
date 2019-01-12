@@ -60,7 +60,7 @@ namespace KeepMonitorOn
             TrayIcon.MouseClick += TrayIcon_MouseClick;
             State = true;
             TrayIcon.Visible = true;
-            TrayIcon.ShowBalloonTip(1000, "Keep On", "Keep Monitor Always On.", Forms.ToolTipIcon.Info);
+            //TrayIcon.ShowBalloonTip(1000, "Keep On", "Keep Monitor Always On.", Forms.ToolTipIcon.Info);
         }
 
         private void TrayIcon_MouseClick(object sender, Forms.MouseEventArgs e)
