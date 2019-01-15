@@ -22,14 +22,14 @@
             <StackPanel>
                 <ListView Name="BuildinApps_ListView">
                     <ListView.Items>
-                        <local:ToolApp AppName="Input Spy" Protocol="inputspy:" Description="System low-level hook"></local:ToolApp>
-                        <local:ToolApp AppName="Keep Monitor On" Protocol="keepmonitoron:" Description="Avoid system sleep"></local:ToolApp>
+                        <local:ToolApp DisplayName="Input Spy" CodeName="InputSpy" Protocol="inputspy:" Description="System low-level hook"></local:ToolApp>
+                        <local:ToolApp DisplayName="Keep Monitor On" CodeName="KeepMonitorOn" Protocol="keepmonitoron:" Description="Avoid system sleep"></local:ToolApp>
                         <!--<local:ToolApp AppName="Network" Description="get http header"></local:ToolApp>-->
                     </ListView.Items>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Width="150">
-                                <Button Content="{Binding AppName}" Click="BuildinApps_ListView_Item_Run" Height="50"></Button>
+                                <Button Content="{Binding DisplayName}" Click="BuildinApps_ListView_Item_Run" Height="50"></Button>
                                 <StackPanel.ToolTip>
                                     <ToolTip>
                                         <StackPanel>
