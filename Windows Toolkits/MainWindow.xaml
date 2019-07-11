@@ -56,11 +56,11 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                 </ListView>
-                <wpf:AutoLinkTextBox FontSize="16" xml:space="preserve">Open source toolkits, find codes here: [https://github.com/XUJINKAI/Windows-Toolkits.git]
+                <wpf:AutoLinkTextBlock FontSize="16" xml:space="preserve">Open source toolkits, find codes here: [https://github.com/XUJINKAI/Windows-Toolkits.git]
 Rate this app in [microsoft store](ms-windows-store://pdp/?productid=9N7L3N58WT58)
 
 Author: [XUJINKAI.net](https://xujinkai.net), Try anothor powerful hotkey tool:
-OneQuick: [Store page](ms-windows-store://pdp/?productid=9PFN5K6QXT46), [Home page](https://onequick.org)</wpf:AutoLinkTextBox>
+OneQuick: [Store page](ms-windows-store://pdp/?productid=9PFN5K6QXT46), [Home page](https://onequick.org)</wpf:AutoLinkTextBlock>
             </StackPanel>
         </ScrollViewer>
     </Grid>

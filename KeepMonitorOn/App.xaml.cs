@@ -5,15 +5,16 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Forms = System.Windows.Forms;
 using XJK.SysX;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace KeepMonitorOn
 {
     /// <summary>
     /// App.xaml 的交互逻辑
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
         private bool _state;
         public bool State
@@ -22,6 +23,7 @@ namespace KeepMonitorOn
             {
                 _state = value;
                 Power.KeepSystemMonitorOn(value);
+                UpdateContextMenu();
                 if (value)
                 {
                     TrayIcon.Icon = KeepMonitorOn.Properties.Resources.IconKeep;
@@ -35,39 +37,61 @@ namespace KeepMonitorOn
             }
         }
 
-        public Forms.NotifyIcon TrayIcon;
+        public NotifyIcon TrayIcon;
+
+        private void UpdateContextMenu()
+        {
+            var menu = new ContextMenu();
+            menu.MenuItems.Add("Check State (powercfg /requests)", (sender, e) =>
+            {
+                Cmd.New("cmd", "/k powercfg /requests")
+                .RunAs(XJK.SysX.CommandHelper.Privilege.Admin)
+                .Excute();
+            });
+            menu.MenuItems.Add("-");
+            menu.MenuItems.Add("Power Suspend (Wheel Click)", (sender, e) => PowerSuspend());
+            menu.MenuItems.Add("-");
+            menu.MenuItems.Add(new MenuItem("Enable", (sender, e) =>
+            {
+                State = !State;
+            })
+            { Checked = State, DefaultItem = true });
+            menu.MenuItems.Add("Exit", (sender, e) =>
+            {
+                Shutdown();
+            });
+            TrayIcon.ContextMenu = menu;
+        }
+
+        private void PowerSuspend()
+        {
+            State = false;
+            Thread.Sleep(200);
+            Power.Suspend();
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             Exit += App_Exit;
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
-            TrayIcon = new Forms.NotifyIcon()
-            {
-                ContextMenu = new Forms.ContextMenu()
-            };
-            TrayIcon.ContextMenu.MenuItems.Add("Check State", (sender, arg) =>
-            {
-                Cmd.New("cmd", "/k powercfg /requests")
-                .RunAs(XJK.SysX.CommandHelper.Privilege.Admin)
-                .Excute();
-            });
-            TrayIcon.ContextMenu.MenuItems.Add("-");
-            TrayIcon.ContextMenu.MenuItems.Add("Exit", (sender, arg) =>
-            {
-                App.Current.Shutdown();
-            });
+            TrayIcon = new NotifyIcon();
             TrayIcon.MouseClick += TrayIcon_MouseClick;
             State = true;
             TrayIcon.Visible = true;
             //TrayIcon.ShowBalloonTip(1000, "Keep On", "Keep Monitor Always On.", Forms.ToolTipIcon.Info);
         }
 
-        private void TrayIcon_MouseClick(object sender, Forms.MouseEventArgs e)
+        private void TrayIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            if(e.Button == Forms.MouseButtons.Left)
+            switch (e.Button)
             {
-                State = !State;
+                case MouseButtons.Left:
+                    State = !State;
+                    break;
+                case MouseButtons.Middle:
+                    PowerSuspend();
+                    break;
             }
         }
         
